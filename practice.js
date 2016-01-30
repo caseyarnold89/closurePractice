@@ -72,13 +72,22 @@ var makeCounter = function () {
   After the function has been called N number of times, console.log('STAHHP');
 */
 
-var outer = function (middle) {
+function outside(middle, amount) {
     var count = 0;
-    if (count < 1) {
-        var inner = middle();
-        count += 1;
+    return function() {
+        if (count <= amount) {
+            middle();
+            count++;
+        }
+        else {
+            console.log('STAHHP');
+        }
     }
-    return inner;
 }
 
+var returnedF = outside(function() {
+    alert('first');
+},5)
+returnedF();
+returnedF();
 
